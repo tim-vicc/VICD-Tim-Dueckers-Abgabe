@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+<!-- zeigt den Inhalt der Reservationsübersicht an -->
+{% block content %}
+    <div class="flex-grow py-10 px-20 flex flex-col">
+        <div class="flex w-full flex-grow">
+            <div class="flex flex-col gap-20 items-center flex-grow card bg-base-300 rounded-box px-8 py-10">
+                <h1 class="text-4xl font-bold">Reservationsübersicht</h1>
+                <div class="stats shadow">
+                    <div class="stat place-items-center">
+                        <div class="stat-title">Auslastung heute </div>
+                        <div class="stat-value">{{ occupation }} %</div>
+                    </div>
+                    <div class="stat place-items-center">
+                        <div class="stat-title">Reservationen </div>
+                        <div class="stat-value text-secondary">{{ reservations|length }}</div>
+                    </div>
+                    <div class="stat place-items-center">
+                        <div class="stat-title">Gesamtkosten</div>
+                        <div class="stat-value">{{ revenue }} CHF</div>
+                    </div>
+                    </div>
+                    <div class="overflow-x-auto">
+                    <table class="table">
+                        <!-- head für Reservationsliste-->
+                        <h3 class="text-4xl font-bold">Total Benutzer Reservationen</h3>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Datum</th>
+                                <th>Arbeitsplatz</th>
+                                <th>Benutzer</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for res in reservations %}
+                                <tr>
+                                    <th>{{ loop.index }}</th>
+                                    <td>{{ res.date }}</td>
+                                    <td>{{ res.workplace_desk.id }}</td>
+                                    <td>{{ res.user.username }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,31 @@
+<!-- Speichert alle flash nachrichten in messages und prüft ob es nachrichten gibt -->
+{% with messages = get_flashed_messages(with_categories=true) %} 
+{% if messages%}
+<div class="toast toast-top toast-end top-20 z-50">
+  <!-- arbeitet alle nachrichten durch -->
+  {% for category, message in messages %}
+  <!-- Darstellung der Benachrichtigung mittels angaben aus dem css -->
+  <div
+    class="alert alert-{{'info' if not category == 'error' else 'error'}} p-4"
+  >
+    <!-- teilt nit, dass ein SVG dargestellt wird mit entsprechender darstellung um eine Vektorgrafik darstellen zu können -->
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      class="stroke-current shrink-0 w-6 h-6"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+      ></path>
+    </svg>
+    <!-- Nachrichtenhinhalt -->
+    <span>{{ message }}</span>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endwith %}
+<!--Teilweise generiert, vsc cody-->

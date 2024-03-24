@@ -1,0 +1,9 @@
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    'ignore::DeprecationWarning',
+]
+[tool.pyright]
+include = ["app"]
+exclude = ["**/node_modules", "**/__pycache__"]
+reportMissingImports = true

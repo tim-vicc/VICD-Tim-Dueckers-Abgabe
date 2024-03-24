@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="hero flex-grow bg-base-200">
+        <div class="hero-content text-center">
+            <div class="max-w-md">
+                <h1 class="text-5xl font-bold">Error</h1>
+                <p class="py-6">
+                    Es ist ein Fehler aufgetreten.
+
+                    INFO Benutzerregistrierung: Es könnte sein, dass dieser Benutzername oder die Email Adresse bereits verwendet werden.
+                </p>
+                <a href="{{ url_for("workplace.index") }}" class="btn btn-primary">Zurück zur Übersicht</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

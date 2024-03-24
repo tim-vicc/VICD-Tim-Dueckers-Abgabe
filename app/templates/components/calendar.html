@@ -1,0 +1,47 @@
+<!-- importiert kalendertage aus entsprechendem file -->
+{% import 'components/calendarday.html' as calendarday %}
+<div class="flex-none">
+    <!-- Zeigt Monat, Jahr und WOchentage an -->
+    <div class="flex items-center text-center">
+        <div class="flex-auto text-lg font-semibold">{{ month }} {{ year }}</div>
+    </div>
+    <div class="mt-6 grid grid-cols-7 text-center text-xs leading-6">
+        <div>Mo</div>
+        <div>Di</div>
+        <div>Mi</div>
+        <div>Do</div>
+        <div>Fr</div>
+        <div>Sa</div>
+        <div>So</div>
+    </div>
+    <!-- Darstellung des Monats it den Tagen in einem Raster-->
+    <div class="isolate mt-2 grid grid-cols-7 gap-px text-sm shadow ring-1 ring-neutral">
+        {% for week in weeks %}
+            {% for entry in week %}
+                {% set isCurrentDay = false %}
+                {% if entry.day == activeDate.day %}
+                    {% set isCurrentDay = True %}
+                {% endif %}
+                {% set isCurrentMonth = False %}
+                {% if entry.month == month %}
+                    {% set isCurrentMonth = true %}
+                {% endif %}
+                {{ calendarday.calendarday(entry, today, currentDay=isCurrentDay, currentMonth=isCurrentMonth) }}
+            {% endfor %}
+        {% endfor %}
+    </div>
+    <!-- diverse Infromationen für den Benutrzer -->
+    <div class="mt-4 flex flex-col gap-2 items-center">
+        <p class="text-neutral-content">Heute</p>
+        <p class="text-info">Ausgewählter Tag</p>
+    </div>
+    <div class="mt-4 flex flex-col gap-2 items-center">
+        <p class="text-sm text-center">
+            Wählen Sie das gewünschte Datum für die Reservation aus. Anschliessend wählen Sie den gewünschten Arbeitsplatz und wählen "Reservieren".
+            Es ist ausschlisslich eine Reservation pro Tag möglich. Es kann nur innerhalb des aktuellen Monats eine Reservation vorgenommen werden. 
+            Um eine Reservation aufzulösen, wählen Sie das Datum der Reservation aus und wählen bei dem Arbeitsplatz "Freigeben"
+            Die Reservationskosten werden am Ende des Monats in Rechnung gestellt.
+        </p>
+    </div>
+</div>
+<!--Teilweise generiert, vsc cody-->

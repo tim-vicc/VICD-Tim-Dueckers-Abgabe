@@ -1,0 +1,31 @@
+<!-- erstellt Macro für die Kalendertagdarstellun, Formatierungen aus .css werden übernommen-->
+{% macro calendarday(date, today, currentDay=False, currentMonth=False ) -%}
+    {% set isToday = False %}
+    {% if date.day == today.day %}
+        {% set isToday = True %}
+    {% endif %}
+    {% set bg = "bg-base-300" %}
+    {% if not currentMonth or date < today %}
+        {% set bg = "bg-base-100" %}
+    {% endif %}
+    {% set ringbg = "" %}
+    {% if isToday %}
+        {% set ringbg = "bg-neutral-content" %}
+    {% endif %}
+    {% if currentDay %}
+        {% set ringbg = "bg-info" %}
+    {% endif %}                                   
+    {% if date >= today %} <!-- ist der Wert des Datums grösser gleich wie der aktuelle tag wird der Tag wählbar, respektive der link dafür wird definiert -->
+        <a type="button"
+           href="{{ url_for('workplace.date', date=date) }}"
+           class="{{ bg }} px-2 py-1.5 {{'text-gray-400' if not currentDay and not isToday else 'text-white'}} hover:bg-neutral focus:z-10">
+            <time class="mx-auto flex h-10 w-10 items-center justify-center {{ ringbg }}">{{ date.day }}</time>
+        </a>
+        <!-- ist der wert des Tages geringer als der aktuelle Tag, wird ein button ohne link erstellt -->
+    {% else %}    
+        <button type="button" class="{{ bg }} px-2 py-1.5 text-gray-400">
+            <time class="mx-auto flex h-10 w-10 items-center justify-center ">{{ date.day }}</time>
+        </button>
+    {% endif %}
+{%- endmacro %}
+<!--Teilweise generiert, vsc cody-->

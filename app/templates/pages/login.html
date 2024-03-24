@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+<!-- zeigt den Inhalt der Login Seite in einem Container an welcher durch das css entsprechend dargestellt wird -->
+{% block content %}
+    <div class="hero flex-grow bg-base-200">
+        <div class="hero-content flex-col gap-12 lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+                <h1 class="text-5xl font-bold">Jetzt einloggen!</h1>
+                <p class="py-6">
+                    Loggen Sie sich mit ihrem Benutzer ein. Sollten Sie über kein Login verfügen, registrieren Sie sich bitte unter "Registrieren". Wenn Sie ihr Passwort oder den Benutzernamen vergessen haben, wenden Sie sich an ihren Worplace Manager Administrator.
+                </p>
+                <a class="btn btn-secondary mt-r text-sm"
+                   href="{{ url_for("auth.register") }}">Registrieren</a>
+            </div>
+            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div class="card-body">
+                    <form action="" method="post" novalidate>
+                        {{ form.hidden_tag() }}
+                        <div class="form-control">
+                            {{ form.username.label }}
+                            {{ form.username(size=32) }}
+                            {% for error in form.username.errors %}
+                                <label class="label">
+                                    <span class="text-red-400 label-text-alt">{{ error }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <div class="form-control mt-3">
+                            {{ form.password.label }}
+                            {{ form.password(size=32) }}
+                            {% for error in form.password.errors %}
+                                <label class="label">
+                                    <span class="text-red-400 label-text-alt">{{ error }}</span>
+                                </label>
+                            {% endfor %}
+                        </div>
+                        <div class="form-control mt-6">{{ form.submit() }}</div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <!-- Erstellen des Base templates zur Verwendung in anderen Seiten -->
+  <head class="min-h-screen">
+    {% if title %}
+    <title>Workplace Reservation - {{ title }}</title>
+    {% else %}
+    <title>Workplace Reservation</title>
+    {% endif %}
+    <link
+      rel="manifest"
+      href="{{url_for('static',filename='site.webmanifest')}}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{url_for('static',filename='css/tailwind.css')}}"
+    />
+  </head>
+  <!-- zeigt flash benachrichtigungen und den hauptinhalt an -->
+  <body class="flex flex-col min-h-screen">
+    {% include 'components/flash.html' %} {% include 'components/header.html' %}
+    <div class="flex-grow flex flex-col">{% block content %}{% endblock %}</div>
+  </body>
+</html>

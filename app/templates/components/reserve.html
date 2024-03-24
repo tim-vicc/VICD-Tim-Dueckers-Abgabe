@@ -1,0 +1,10 @@
+<!-- reserve macro wird definiert um den reservationssbutton entsprechend erstellen zu können auf der Hauptseite-->
+{% macro reserve(id, is_reserved, date, form) -%} {% if not is_reserved %}
+<form action="{{url_for('workplace.reserve', desk=id, day=date )}}" method="post">
+  {{ form.hidden_tag() }} {{ form.submit(value='Reservieren') }}
+</form>
+{% else %}
+<form action="{{url_for('workplace.free', desk=id, day=date)}}" method="post">
+  {{ form.hidden_tag() }} {{ form.submit(value='Freigeben') }}
+</form>
+{% endif %} {%- endmacro %}

@@ -1,0 +1,9 @@
+{% import 'components/reserve.html' as reserverender %} {% macro desk(id,
+is_reserved, info, activeDate, form) -%}
+<div
+  class="gap-4 flex items-center justify-center flex-col border-2 {{'border-green-300' if not is_reserved else 'border-red-300'}} p-4"
+>
+  <h1 class="fw-bold text-2xl">{{id}}</h1> <!--Zeigt die Platznummer an -->
+  {{ reserverender.reserve(id, is_reserved, activeDate, form) }} <!-- je nach status wird der Reservieren- oder Freigabebutton gerendert -->
+</div>
+{%- endmacro %}

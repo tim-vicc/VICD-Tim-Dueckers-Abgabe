@@ -1,0 +1,24 @@
+<!-- Fortmmatierung der Navigationsleiste -->
+<div class="navbar bg-base-100">
+  <div class="flex-1">
+
+    <!-- Reservationsseite als button  auf linker Seite-->
+    <a
+      class="btn btn-ghost normal-case text-xl"
+      href="{{ url_for('workplace.index') }}"
+      >Workplace Manager</a
+    >
+  </div>
+  <!-- Verlinkung zu den Navigationslinks -->
+  <div class="flex-none">
+    <ul class="menu menu-horizontal px-1">
+      <!-- ist der Benutzer nicht angemeldet, wird Login angeezeigt -->
+      {% if current_user.is_anonymous %}
+      <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+      {% else %}
+      <li><a href="{{ url_for('workplace.reservationsuebersicht') }}">Reservationsübersicht</a></li>
+      <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>

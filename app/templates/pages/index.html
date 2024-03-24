@@ -1,0 +1,22 @@
+<!-- verwendet das basis template -->
+{% extends "base.html" %}
+{% import 'components/desk.html' as deskrender %}
+<!--zeigt in einem Container deb Wevseiteninhalt an, container wird entsprechend durch das css angepasst -->
+{% block content %}
+    <div class="flex-grow py-10 px-20 flex flex-col">
+        <div class="flex w-full flex-grow">
+            <div class="grid flex-grow min-h-full card bg-base-300 rounded-box place-items-center px-8 py-10">
+                <div class="grid grid-cols-3 gap-6 w-full h-full">
+                    {% for desk in desks %}
+                        {{ deskrender.desk(desk.id, desk.is_reserved(activeDate) , desk.info, activeDate, form) }}
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="divider divider-horizontal"></div>
+            <div class="card max-w-md bg-base-300 rounded-box flex px-8 py-10">
+                <h3 class="text-2xl">Kalender</h3>
+                <div>{% include 'components/calendar.html' %}</div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
